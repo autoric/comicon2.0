@@ -1,0 +1,25 @@
+{{#username}}
+<ul class="nav">
+    <li><a href="/{{username}}">My Page</a></li>
+    <li class="dropdown">
+        <a href="#"
+           class="dropdown-toggle"
+           data-toggle="dropdown">
+            Comics
+            <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a href="/browse">Browse<i class="pull-right icon-search"></i></a></li>
+            <li><a href="/newComic">New<i class="pull-right icon-plus"></i></a></li>
+        </ul>
+    </li>
+</ul>
+{{/username}}
+<ul id="login-status-container" class="nav pull-right">
+    {{#username}}
+    <li><a href="#" id="logout-button">Logout</a></li>
+    {{/username}}
+    {{^username}}
+    <li><a href="#" id="login-button">Login</a></li>
+    {{/username}}
+</ul>

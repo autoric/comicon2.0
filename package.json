@@ -1,0 +1,44 @@
+{
+    "name": "b12prj",
+    "version": "0.0.1",
+    "directories": {},
+    "engines": {
+        "node": ">=0.6.6",
+        "npm": ">=1.1"
+    },
+    "dependencies": {
+        "base12": "0.3.1",
+        "jade": "latest",
+        "express": "git://github.com/Skookum/express.git",
+        "connect": "2.0.3",
+        "connect-timeout": "latest",
+        "stylus": "latest",
+        "mongodb": "latest",
+        "connect-mongodb": "latest",
+        "express-resource": "latest",
+        "express-messages": "git://github.com/hunterloftis/express-messages.git#master",
+        "redis": "latest",
+        "strobe": "latest",
+        "restfuljs": "latest",
+        "bcrypt":"latest",
+        "mongoose":"latest",
+        "underscore":"latest"
+    },
+    "devDependencies": {
+        "vows": "latest",
+        "commander": "latest",
+        "async": "latest",
+        "handlebars": "latest"
+    },
+    "scripts": {
+        "start": "./run",
+        "lock": "scripts/module_lock.js",
+        "postinstall": "scripts/postinstall",
+        "test": "vows test/*.vows.js"
+    },
+    "constants": {
+        "title": "base12 app",
+        "session_length": 1209600000,
+        "request_timeout": 10000
+    }
+}

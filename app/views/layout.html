@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Comicon - comic aggregator!</title>
+    <link rel="stylesheet" href="/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/css/global.css"/>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/underscore.js"></script>
+    <script type="text/javascript" src="/js/backbone.js"></script>
+    <script type="text/javascript" src="/js/mustache.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/comicon.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+
+    <div id="header" class="navbar">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="brand" href="/">The New Sunday Comics</a>
+                <span id="navbar-container" >
+                    {{> navbar }}
+
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div id="content">
+        {{{ body }}}
+    </div>
+
+    <div id="footer">
+
+    </div>
+
+    <div class="modal hide fade" id="modal-container">
+
+    </div>
+</div>
+
+</body>
+</html>
