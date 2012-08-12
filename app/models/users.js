@@ -5,30 +5,19 @@ module.exports = function (app) {
     var UserSchema = new mongoose.Schema({
         username:{ type:String, required:true, unique:true },
         email:{ type:String, required:true, unique:true },
-        password:{ type:String, required:true},
+        password:{ type:String, required:true, set: hash},
         subscriptions:[
             {type:mongoose.Schema.Types.ObjectId, ref:'comics'}
         ]
     });
 
+    function hash(password){
+        //whenever the password is set on a user model it is automatically hashed using
+        //the bcrypt algorithm with a random 10-digit salt
+        return bcrypt.hashSync(password, 10)
+    }
+
     UserSchema.methods = {
-        /*
-        TODO:
-        Currently forcing myself to handle User models separately in api routes and manually user
-        setPassword to make sure pw is hashed. Investigate using .pre('set') hooks to hash a password
-        at save to make it more transparent
-         */
-        setPassword:function (password, cb) {
-            console.log('setting password')
-            cb = cb || function () {
-            };
-            var self = this;
-            bcrypt.hash(password, 10, function (err, hash) {
-                if (err) return cb(err);
-                self.password = hash;
-                cb();
-            })
-        },
         authenticate:function (password, cb) {
             return bcrypt.compare(password, this.password, cb);
         }

@@ -44,7 +44,14 @@ module.exports = function (app) {
     //override the method with a post argument or a request header
     app.use(express.methodOverride());
     //now go to routes - after all of our other middle ware has acted and set up requests objects or resolved the requests
+    app.use(function(req, res, next) {
+        //TODO: move to its own middleware
+        res.locals.viewParams = {};
+        res.locals.user = res.locals.viewParams.user = req.session.user || null;
+        next();
+    });
     app.use(app.router);
+    app.use(app.middleware.negotiator);
 
     // Handle errors thrown from middleware/routes
     app.use(error_middleware);
