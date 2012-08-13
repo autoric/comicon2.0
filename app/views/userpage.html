@@ -1,7 +1,9 @@
-<h3>{{#userId}}{{userId}}'s Page {{/userId}}{{^userId}}Most popular comics:{{/userId}}</h3>
+<h3>{{#owner}}{{username}}'s Page {{/owner}}</h3>
 
 <div id="comics">
     {{#comics}}
-        {{>comicList}}
+        {{#withContext ..}}
+        {{>partials/comic-userpage}}
+        {{/withContext}}
     {{/comics}}
 </div>

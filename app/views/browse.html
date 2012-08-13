@@ -1,14 +1,33 @@
-<div id="list">
-</div>
+<table id="comicsList" class="table table-striped">
+    <thead>
+    <tr>
+        <th>
+            Info
+        </th>
+        <th>
+            Comic
+        </th>
+        {{#if user}}
+        <th>
+            Subscribe
+        </th>
+        {{/if}}
+    </tr>
+    </thead>
+    {{#each comics}}
+        {{#withContext ..}}
+        {{> partials/comic-browse}}
+        {{/withContext}}
+    {{/each}}
+</table>
 <div class="pagination">
     <ul>
         <li><a href="#">Prev</a></li>
-        <li class="active">
-            <a href="#">1</a>
+        {{#each pages}}
+        <li class="{{active}}">
+            <a href="/comics/p{{page}}">{{page}}</a>
         </li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
+        {{/each}}
         <li><a href="#">Next</a></li>
     </ul>
 </div>

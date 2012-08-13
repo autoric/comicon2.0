@@ -4,12 +4,23 @@
     <title>Comicon - comic aggregator!</title>
     <link rel="stylesheet" href="/css/bootstrap.css"/>
     <link rel="stylesheet" href="/css/global.css"/>
+
+    <!--js libraries-->
     <script type="text/javascript" src="/js/jquery.js"></script>
     <script type="text/javascript" src="/js/underscore.js"></script>
     <script type="text/javascript" src="/js/backbone.js"></script>
-    <script type="text/javascript" src="/js/mustache.js"></script>
+    <script type="text/javascript" src="/js/handlebars.js"></script>
     <script type="text/javascript" src="/js/bootstrap.js"></script>
-    <script type="text/javascript" src="/js/comicon.js"></script>
+
+    <!--custom js-->
+    <script type="text/javascript" src="/js/app.js"></script>
+    <script type="text/javascript" src="/js/models.js"></script>
+    <script type="text/javascript" src="/js/views.js"></script>
+    <script type="text/javascript" src="/js/router.js"></script>
+    <script type="text/javascript">
+        app.viewData = {{{toJSON viewData}}}
+    </script>
+
 </head>
 <body>
 <div class="container-fluid">
@@ -19,7 +30,7 @@
             <div class="container">
                 <a class="brand" href="/">The New Sunday Comics</a>
                 <span id="navbar-container" >
-                    {{> navbar }}
+                    {{> partials/navbar }}
 
                 </span>
             </div>

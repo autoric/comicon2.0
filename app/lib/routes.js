@@ -11,6 +11,7 @@ module.exports = function(app) {
     app.get('/signup', app.controllers.site.signup);
     app.get('/comics', app.controllers.site.browseComics);
     app.get('/comics/p:page', app.controllers.site.browseComics);
+    app.get('/templates', app.controllers.site.templates)
 
     /*
      ---------Api Routes----------

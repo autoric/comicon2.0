@@ -46,8 +46,12 @@ module.exports = function (app) {
     //now go to routes - after all of our other middle ware has acted and set up requests objects or resolved the requests
     app.use(function(req, res, next) {
         //TODO: move to its own middleware
-        res.locals.viewParams = {};
-        res.locals.user = res.locals.viewParams.user = req.session.user || null;
+        //TODO: think about character encoding...
+        res.charset=app.config.character_encoding;
+        res.locals.viewData = {};
+        res.locals.user = res.locals.viewData.user = req.session.user || {
+            username:'erin'
+        };
         next();
     });
     app.use(app.router);

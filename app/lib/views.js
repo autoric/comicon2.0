@@ -29,12 +29,21 @@ module.exports = function(app) {
                     return readTemplates(file, next);
                 }
                 if(stats.isFile()) {
-                    fs.readFile(filepath, 'utf-8', function(err, text) {
-                        if(err) return next(err);
-                        var key = path.join(dir, path.basename(file, path.extname(file)));
-                        templates[key] = text;
-                        return next();
-                    });
+                    //TODO: get rid of / deal with watch
+                    fs.watch(filepath, readFile);
+                    readFile(next);
+
+                    function readFile(cb) {
+                        if(typeof cb !== 'function'){
+                            cb = function(){}
+                        }
+                        fs.readFile(filepath, app.config.character_encoding, function(err, text) {
+                            if(err) return cb(err);
+                            var key = path.join(dir, path.basename(file, path.extname(file)));
+                            templates[key] = text;
+                            return cb();
+                        });
+                    }
                 }
                 else {
                     return next();
@@ -45,16 +54,36 @@ module.exports = function(app) {
 
     function registerTemplates(err) {
         _.each(templates, function(template, key){
+            //handlebars replaces / with . so i need to do the same...dumb
+            var key = key.replace(/\//g, ".");
             handlebars.registerPartial(key, template);
         });
 
         app.set('templates', templates);
     }
 
-    app.engine('html', function(p, options, fn) {
-        console.log('handlebars engine')
-        console.log(options.username);
+    //Handlebars hack for passing parent context to partials...
+    handlebars.registerHelper('withContext', function ( parent, options ) {
+        console.log('withcontext');
+        //console.log(parent);
+        console.log(this);
+        if ( typeof parent !== 'object' ) {
+            return '';
+        }
+        this['_context']=parent;
+        return options.fn( this );
+    });
 
+    //console.log('app locals');
+    var locals = _.keys(app.locals)
+    _.each(locals, function(key, i) {
+        var value = app.locals[key];
+        if(_.isFunction(value)){
+            handlebars.registerHelper(key, value);
+        }
+    })
+
+    app.engine('html', function(p, options, fn) {
         var dir = path.dirname(p);
         var file = path.basename(p, path.extname(p));
         var key = path.relative(basedir, path.join(dir, file));
@@ -66,13 +95,12 @@ module.exports = function(app) {
         if(layout)  {
             options.body = body;
             options.layout = undefined;
-            app.render(layout, options, fn);
+            return app.render(layout, options, fn);
         }
         else {
-            fn(null, body);
+            return fn(null, body);
         }
     })
 
     app.set('view engine', 'html');
-
 }
