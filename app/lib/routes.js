@@ -8,10 +8,14 @@ module.exports = function(app) {
     app.get('/', app.controllers.site.index);
     app.get('/users/:username', app.controllers.site.userPage);
     app.post('/login', app.controllers.site.login);
+    app.del('/logout', app.controllers.site.logout);
     app.get('/signup', app.controllers.site.signup);
+    app.get('/comics/new', app.controllers.site.newComic);
     app.get('/comics', app.controllers.site.browseComics);
     app.get('/comics/p:page', app.controllers.site.browseComics);
-    app.get('/templates', app.controllers.site.templates)
+    app.get('/templates', app.controllers.site.templates);
+    app.post('/scrape', app.controllers.site.scrape);
+
 
     /*
      ---------Api Routes----------

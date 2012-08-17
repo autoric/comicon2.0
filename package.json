@@ -22,7 +22,8 @@
         "restfuljs": "latest",
         "bcrypt":"latest",
         "mongoose":"latest",
-        "underscore":"latest"
+        "underscore":"latest",
+        "jsdom":"latest"
     },
     "devDependencies": {
         "vows": "latest",

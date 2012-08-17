@@ -18,12 +18,11 @@
     <script type="text/javascript" src="/js/views.js"></script>
     <script type="text/javascript" src="/js/router.js"></script>
     <script type="text/javascript">
-        app.viewData = {{{toJSON viewData}}}
+        comicon.viewData = {{{toJSON viewData}}}
     </script>
 
 </head>
 <body>
-<div class="container-fluid">
 
     <div id="header" class="navbar">
         <div class="navbar-inner">
@@ -31,13 +30,12 @@
                 <a class="brand" href="/">The New Sunday Comics</a>
                 <span id="navbar-container" >
                     {{> partials/navbar }}
-
                 </span>
             </div>
         </div>
     </div>
 
-    <div id="content">
+    <div id="content" class="container-fluid">
         {{{ body }}}
     </div>
 
@@ -48,7 +46,6 @@
     <div class="modal hide fade" id="modal-container">
 
     </div>
-</div>
 
 </body>
 </html>

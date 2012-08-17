@@ -4,7 +4,7 @@ var fs = require('fs'),
     _=require('underscore'),
     handlebars = require('handlebars');
 
-//NOTE: not currently used. This is something I'm experimenting with.
+//TODO: Hacky experimenting!  Once I have dialed in the approach, modularize it appropriately.
 module.exports = function(app) {
 
     var basedir = path.resolve(__dirname, '../views');
@@ -64,9 +64,6 @@ module.exports = function(app) {
 
     //Handlebars hack for passing parent context to partials...
     handlebars.registerHelper('withContext', function ( parent, options ) {
-        console.log('withcontext');
-        //console.log(parent);
-        console.log(this);
         if ( typeof parent !== 'object' ) {
             return '';
         }
@@ -74,7 +71,6 @@ module.exports = function(app) {
         return options.fn( this );
     });
 
-    //console.log('app locals');
     var locals = _.keys(app.locals)
     _.each(locals, function(key, i) {
         var value = app.locals[key];

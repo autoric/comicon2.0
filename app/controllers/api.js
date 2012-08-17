@@ -107,6 +107,7 @@ module.exports = function (app) {
             Users.findByIdAndUpdate(id, {$addToSet:{subscriptions:comicId}}, function (err, doc) {
                 if (err) return next(err);
                 if (doc === null) return res.send(404);
+                console.log('subscription success for id: '+comicId)
                 return res.json(doc);
             })
         }

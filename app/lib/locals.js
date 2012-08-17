@@ -8,10 +8,15 @@ module.exports = function (app) {
     // Static locals
 
     app.locals({
-        toJSON: function(obj){
-            console.log('calling local')
-            console.log(obj)
+        toJSON:function (obj) {
             return JSON.stringify(obj);
+        },
+        block:function (name) {
+            console.log(name);
+        },
+        extend:function (name, context) {
+
         }
+
     });
 };

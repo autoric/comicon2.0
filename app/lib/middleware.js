@@ -13,7 +13,6 @@ module.exports = function (app) {
 
     var session_middleware = express.session({
         key:app.config.session_key,
-        cookie:{ secure:true },
         store:mongoStore,
         maxAge:app.config.session_length
     });
@@ -44,15 +43,22 @@ module.exports = function (app) {
     //override the method with a post argument or a request header
     app.use(express.methodOverride());
     //now go to routes - after all of our other middle ware has acted and set up requests objects or resolved the requests
-    app.use(function(req, res, next) {
+    app.use(function (req, res, next) {
         //TODO: move to its own middleware
         //TODO: think about character encoding...
-        res.charset=app.config.character_encoding;
+        res.charset = app.config.character_encoding;
         res.locals.viewData = {};
-        res.locals.user = res.locals.viewData.user = req.session.user || {
-            username:'erin'
-        };
-        next();
+        userId = req.session.user;
+        if (userId) {
+            app.models.users.findById(userId, {password:0}, function(err, doc){
+                res.locals.user = res.locals.viewData.user = doc;
+                return next();
+            })
+        }
+        else {
+            res.locals.user = res.locals.viewData.user = {};
+            next();
+        }
     });
     app.use(app.router);
     app.use(app.middleware.negotiator);
