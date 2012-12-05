@@ -13,7 +13,7 @@ module.exports = function(app) {
     app.get('/comics/new', app.controllers.site.newComic);
     app.get('/comics', app.controllers.site.browseComics);
     app.get('/comics/p:page', app.controllers.site.browseComics);
-    app.get('/templates', app.controllers.site.templates);
+    app.get('/templates', app.controllers.site.templates)
     app.post('/scrape', app.controllers.site.scrape);
 
 

@@ -14,8 +14,10 @@ module.exports = function (app) {
             image:String,
             caption:String
         },
-        subscribers:{type:Number, default:0}
-    })
+        subscribers:{type:Number,
+            'default':0
+        }
+    });
 
     return mongoose.model('comics', ComicSchema);
 }

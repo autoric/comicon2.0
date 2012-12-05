@@ -12,8 +12,6 @@ module.exports = function (app) {
     });
 
     function hash(password){
-        //whenever the password is set on a user model it is automatically hashed using
-        //the bcrypt algorithm with a random 10-digit salt
         return bcrypt.hashSync(password, 10)
     }
 

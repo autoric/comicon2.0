@@ -1,0 +1,10 @@
+
+<h3>Most popular comics:</h3>
+
+<div id="comics">
+    {{#comics}}
+        {{#withContext ..}}
+        {{>partials/comic-userpage}}
+        {{/withContext}}
+    {{/comics}}
+</div>

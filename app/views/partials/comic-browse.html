@@ -1,0 +1,16 @@
+<tr>
+    <td>
+        <p><b>Name:</b> {{name}}</p>
+        <p><b>Url:</b> {{url}}</p>
+    </td>
+    <td>
+        {{#with values}}
+        <img class="comic" src="{{{image}}}">
+        {{/with}}
+    </td>
+    {{#if _context.user.username}}
+    <td>
+        <input class="subscription-checkbox" type="checkbox" {{#if subscribed}}checked="checked"{{/if}}>
+    </td>
+    {{/if}}
+</tr>
